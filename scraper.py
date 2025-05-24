@@ -13,11 +13,12 @@ def scrape_page(url):
     soup = BeautifulSoup(response.text, 'html.parser')
 
     # Adjust these selectors to match the website’s structure
-    product_cards = soup.select('.ProductBundle')
+    product_cards = soup.select('.ProductDisdplay-item')
 
     for card in product_cards:
         title = card.select_one('.ProductName').get_text(strip=True)
-        price = card.select_one('.Price').get_text(strip=True)
+        price = card.select_one('.BundlePrice-discounted-price').get_text(strip=True)    
+    
         link = card.select_one('a')['href']
 
         PRODUCTS.append({
